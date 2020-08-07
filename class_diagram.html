@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.0/dist/mermaid.min.js"></script>
+    <div class="mermaid">
+        classDiagram
+        Recipe <-- Tag
+        Recipe "1" <-- "*" RecipeIngredient
+        Ingredient "1" <-- "*" RecipeIngredient
+        Unit "0..1" <-- "*" RecipeIngredient
+        Quantity "0..1" <-- "*" RecipeIngredient
+        Ingredient "1" <-- "*" FridgeIngredient
+        Unit "0..1" <-- "*" FridgeIngredient
+        Quantity "0..1" <-- "*" FridgeIngredient
+        Fridge "1" <-- "*" FridgeIngredient
+
+        class Tag{
+            +String name
+        }
+        class Recipe{
+            -String name
+            -String image
+            -String cook_time
+            -String prep_time
+            -String total_time
+            -String author
+            -String nb_comments
+            -String people_quantity
+            -String budget
+            -String difficulty
+            -String rate, string
+            -String author_tip
+        }
+        class Ingredient{
+            -String name
+        }
+        class Quantity{
+            -String name
+            -Float amount
+            -is_string()
+        }
+        class Unit{
+            -String name
+        }
+        class Fridge{
+        }
+    </div>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+</body>
+</html>
