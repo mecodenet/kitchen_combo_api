@@ -10,7 +10,8 @@ class FridgesController < ApplicationController
 
   # GET /fridges/1
   def show
-    render json: @fridge
+    render json: @fridge.as_json({ include: :ingredients })
+    # render json: { "ingredients_ids": @fridge.ingredients.map(&:id) }
   end
 
   # POST /fridges
