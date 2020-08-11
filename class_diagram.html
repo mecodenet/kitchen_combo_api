@@ -7,19 +7,11 @@
     <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.0/dist/mermaid.min.js"></script>
     <div class="mermaid">
         classDiagram
-        Recipe <-- Tag
         Recipe "1" <-- "*" RecipeIngredient
         Ingredient "1" <-- "*" RecipeIngredient
-        Unit "0..1" <-- "*" RecipeIngredient
-        Quantity "0..1" <-- "*" RecipeIngredient
         Ingredient "1" <-- "*" FridgeIngredient
-        Unit "0..1" <-- "*" FridgeIngredient
-        Quantity "0..1" <-- "*" FridgeIngredient
         Fridge "1" <-- "*" FridgeIngredient
 
-        class Tag{
-            +String name
-        }
         class Recipe{
             -String name
             -String image
@@ -35,14 +27,6 @@
             -String author_tip
         }
         class Ingredient{
-            -String name
-        }
-        class Quantity{
-            -String name
-            -Float amount
-            -is_string()
-        }
-        class Unit{
             -String name
         }
         class Fridge{
