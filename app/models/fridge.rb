@@ -3,30 +3,36 @@ class Fridge < ApplicationRecord
     has_many :ingredients, through: :fridge_ingredients
 
     def fill_with_random_ingredients
+        new_possible_recipes = []
         40.times do
-            ingredients << Ingredient.order(Arel.sql('RANDOM()')).first
+            new_possible_recipes = add_ingredients_to_fridge Ingredient.order(Arel.sql('RANDOM()')).first
         end
-        return
+        return new_possible_recipes
     end
 
     def fill_with_recipe_ingredients recipe
-        recipe.ingredients.map do |i|
-            add_ingredients_to_fridge i
-        end
+        recipe.ingredients.map { |i| add_ingredients_to_fridge i}.uniq.flatten
+        recipe
     end
 
     def add_ingredients_to_fridge ingredient
+        new_possible_recipes = []
         unless ingredients.include? ingredient
             ingredients << ingredient
-            possible_recipes = ingredient.recipes.select do |r|
+            new_possible_recipes = ingredient.recipes.select do |r|
                 r.ingredients.all? { |ri| ingredients.include? ri }
             end
-            # possible_recipes = ingredient.recipes.map do |r|
-            #     puts "r #{r.name}"
-            #     puts r.ingredients.all? { |ri| ingredients.include? ri }
-            # end
         end
+        new_possible_recipes
+    end
 
+    def rm_ingredients_to_fridge ingredient
+        impossible_recipes = []
+        if ingredients.include? ingredient
+            ingredients.delete(ingredient)
+            impossible_recipes = ingredient.recipes
+        end
+        impossible_recipes
     end
 
     def all_ingredients_recipes
@@ -42,17 +48,7 @@ class Fridge < ApplicationRecord
                 end
             end
         end
-
-        # possible_recipes =[]
-        # candidate_recipes.select do |k, v|
-        #     if k.ingredients.count == v
-        #         possible_recipes << k
-        #     end
-        # end
         possible_recipes = candidate_recipes.select { |k, v| v[0] == v[1] }
-
-        # puts candidate_recipes.count
-        # puts possible_recipes.count
-        possible_recipes.map{|k,v| k}
+        possible_recipes.map{|k, v| k}
     end
 end

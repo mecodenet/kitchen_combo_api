@@ -1,5 +1,5 @@
 class FridgesController < ApplicationController
-  before_action :set_fridge, only: [:show, :update, :destroy]
+  before_action :set_fridge, only: [:show, :update, :destroy, :random_fill, :add_ingredients, :rm_ingredients, :recipes, :add_recipe]
 
   # GET /fridges
   def index
@@ -11,14 +11,34 @@ class FridgesController < ApplicationController
   # GET /fridges/1
   def show
     render json: @fridge.as_json({ include: :ingredients })
-    # render json: { "ingredients_ids": @fridge.ingredients.map(&:id) }
   end
 
   # GET /fridges/1/random
   def random_fill
     @fridge.fill_with_random_ingredients
     render json: @fridge.as_json({ include: :ingredients })
-    # render json: { "ingredients_ids": @fridge.ingredients.map(&:id) }
+  end
+
+  # GET /fridges/1/add/:ingredient_id
+  def add_ingredients
+    render json: @fridge.add_ingredients_to_fridge(Ingredient.find(params[:ingredient_id]))
+  end
+
+  # GET /fridges/1/rm/:ingredient_id
+  def rm_ingredients
+    # render json: @fridge.rm_ingredients_to_fridge(Ingredient.find(params[:ingredient_id]))
+    render json: @fridge.rm_ingredients_to_fridge(Ingredient.find(params[:ingredient_id]))
+  end
+
+  # GET /fridges/1/recipes/
+  def recipes
+    render json: @fridge.all_ingredients_recipes
+  end
+
+  # GET /fridges/1/add_recipe/:recipe_id
+  def add_recipe
+    @fridge.fill_with_recipe_ingredients(Recipe.find(params[:recipe_id]))
+    render json: @fridge.as_json({ include: :ingredients })
   end
 
   # POST /fridges

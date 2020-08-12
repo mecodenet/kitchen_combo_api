@@ -4,5 +4,9 @@ Rails.application.routes.draw do
   resources :recipe_ingredients
   resources :recipes
   resources :ingredients
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get 'fridges/:id/add/:ingredient_id', to: 'fridges#add_ingredients'
+  get 'fridges/:id/rm/:ingredient_id', to: 'fridges#rm_ingredients'
+  get 'fridges/:id/random_fill', to: 'fridges#random_fill'
+  get 'fridges/:id/add_recipe/:recipe_id', to: 'fridges#add_recipe'
+  get 'fridges/:id/recipes', to: 'fridges#recipes'
 end
