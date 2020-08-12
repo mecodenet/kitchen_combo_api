@@ -14,6 +14,13 @@ class FridgesController < ApplicationController
     # render json: { "ingredients_ids": @fridge.ingredients.map(&:id) }
   end
 
+  # GET /fridges/1/random
+  def random_fill
+    @fridge.fill_with_random_ingredients
+    render json: @fridge.as_json({ include: :ingredients })
+    # render json: { "ingredients_ids": @fridge.ingredients.map(&:id) }
+  end
+
   # POST /fridges
   def create
     @fridge = Fridge.new(fridge_params)

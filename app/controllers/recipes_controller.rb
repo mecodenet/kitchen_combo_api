@@ -3,9 +3,9 @@ class RecipesController < ApplicationController
 
   # GET /recipes
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.paginate(page: params[:page], per_page: 30)
 
-    render json: @recipes
+    render json: @recipes.as_json({ include: :ingredients })
   end
 
   # GET /recipes/1
