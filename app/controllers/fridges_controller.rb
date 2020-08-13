@@ -10,34 +10,33 @@ class FridgesController < ApplicationController
 
   # GET /fridges/1
   def show
-    render json: @fridge.as_json({ include: :ingredients })
+    render json: @fridge.as_json({ include: [:ingredients, :recipes] })
   end
 
-  # GET /fridges/1/random
+  # POST /fridges/1/random
   def random_fill
-    @fridge.fill_with_random_ingredients
+    @fridge.fill_with_random_ingredients!
     render json: @fridge.as_json({ include: :ingredients })
   end
 
-  # GET /fridges/1/add/:ingredient_id
+  # POST /fridges/1/add/:ingredient_id
   def add_ingredients
-    render json: @fridge.add_ingredients_to_fridge(Ingredient.find(params[:ingredient_id]))
+    render json: @fridge.add_ingredients_to_fridge!(Ingredient.find(params[:ingredient_id]))
   end
 
-  # GET /fridges/1/rm/:ingredient_id
+  # POST /fridges/1/rm/:ingredient_id
   def rm_ingredients
-    # render json: @fridge.rm_ingredients_to_fridge(Ingredient.find(params[:ingredient_id]))
-    render json: @fridge.rm_ingredients_to_fridge(Ingredient.find(params[:ingredient_id]))
+    render json: @fridge.rm_ingredients_to_fridge!(Ingredient.find(params[:ingredient_id]))
   end
 
   # GET /fridges/1/recipes/
   def recipes
-    render json: @fridge.all_ingredients_recipes
+    render json: @fridge.recipes
   end
 
-  # GET /fridges/1/add_recipe/:recipe_id
+  # POST /fridges/1/add_recipe/:recipe_id
   def add_recipe
-    @fridge.fill_with_recipe_ingredients(Recipe.find(params[:recipe_id]))
+    @fridge.fill_with_recipe_ingredients!(Recipe.find(params[:recipe_id]))
     render json: @fridge.as_json({ include: :ingredients })
   end
 

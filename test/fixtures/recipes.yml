@@ -1,7 +1,8 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  id: 1
+  name: MyStrin
   image: MyString
   cook_time: MyString
   prep_time: MyString
@@ -13,8 +14,12 @@ one:
   difficulty: MyString
   rate: MyString
   author_tip: MyString
+  created_at: "2020-08-12 09:26:24"
+  updated_at: "2020-08-12 09:26:24"
+
 
 two:
+  id: 2
   name: MyString
   image: MyString
   cook_time: MyString
@@ -27,3 +32,23 @@ two:
   difficulty: MyString
   rate: MyString
   author_tip: MyString
+  created_at: "2020-08-12 09:26:24"
+  updated_at: "2020-08-12 09:26:24"
+
+
+three:
+  id: 3
+  name: MyString
+  image: MyString
+  cook_time: MyString
+  prep_time: MyString
+  total_time: MyString
+  author: MyString
+  nb_comments: MyString
+  people_quantity: MyString
+  budget: MyString
+  difficulty: MyString
+  rate: MyString
+  author_tip: MyString
+  created_at: "2020-08-12 09:26:24"
+  updated_at: "2020-08-12 09:26:24"

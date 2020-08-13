@@ -1,0 +1,235 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/recipes/?page={page}":
+    get:
+      summary: get 30 recipes per page
+      parameters:
+      - name: page
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: 'TODO document response'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                required:
+                - id
+                - ingredients
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                required:
+                - id
+                - ingredients
+  "/fridges/{id}/random_fill":
+    post:
+      summary: fill the fridge with 40 random ingredients
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 'TODO document response'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  ingrediens:
+                    type: array
+                required:
+                - id
+                - ingredients
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  ingrediens:
+                    type: array
+                required:
+                - id
+                - ingredients
+  "/fridges/{id}":
+    get:
+      summary: get the fridge with ingredients
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 'TODO document response'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                required:
+                - id
+                - ingredients
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                required:
+                - id
+                - ingredients
+  "/fridges/{id}/add/{ingredient_id}":
+    post:
+      summary: add ingredients in the fridge with ingredients and get new possible
+        recipes in the fridge
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 'TODO document response'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                required:
+                - id
+                - ingredients
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                required:
+                - id
+                - ingredients
+  "/fridges/{id}/rm/{ingredient_id}":
+    post:
+      summary: remove ingredients in the fridge with ingredients and get all impossible
+        recipes
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 'TODO document response'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                required:
+                - id
+                - ingredients
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                required:
+                - id
+                - ingredients
+  "/fridges/{id}/recipes":
+    get:
+      summary: get all possible recipes for the fridge
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 'TODO document response'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                required:
+                - id
+                - ingredients
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                required:
+                - id
+                - ingredients
+  "/fridges/{id}/add_recipe/{recipe_id}":
+    post:
+      summary: add ingredients of recipe to fridge and get fridge an ingredients in
+        response
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 'TODO document response'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                required:
+                - id
+                - ingredients
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                required:
+                - id
+                - ingredients
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com
