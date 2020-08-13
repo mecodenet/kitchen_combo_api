@@ -28,11 +28,4 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
     assert_response 200
   end
 
-  test "should destroy recipe" do
-    assert_difference('Recipe.count', -1) do
-      delete recipe_url(@recipe), as: :json
-    end
-
-    assert_response 204
-  end
 end

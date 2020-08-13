@@ -27,12 +27,4 @@ class IngredientsControllerTest < ActionDispatch::IntegrationTest
     patch ingredient_url(@ingredient), params: { ingredient: { name: @ingredient.name } }, as: :json
     assert_response 200
   end
-
-  test "should destroy ingredient" do
-    assert_difference('Ingredient.count', -1) do
-      delete ingredient_url(@ingredient), as: :json
-    end
-
-    assert_response 204
-  end
 end

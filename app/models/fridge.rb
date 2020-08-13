@@ -21,16 +21,9 @@ class Fridge < ApplicationRecord
     unless ingredients.include? ingredient
       candidate_recipes = {}
       ingredients << ingredient
-      ingredient.recipes.each do |r|
-        if candidate_recipes.has_key?(r)
-          candidate_recipes[r][0] += 1
-        else
-          candidate_recipes[r] = [1, r.ingredient_ids.length] # first is count of fridge ing, second is count of recipe
-        end
-      end
-      new_possible_recipes = candidate_recipes.select { |_k, v| v[0] == v[1] }.map { |k, _v| k }
+      new_possible_recipes = ingredient.recipes.select { |r| r.ingredient_ids.all? {|i| ingredient_ids.include? i} }
+      new_possible_recipes.map { |r| self.recipes << r }
     end
-    self.recipes += new_possible_recipes
     new_possible_recipes
   end
 

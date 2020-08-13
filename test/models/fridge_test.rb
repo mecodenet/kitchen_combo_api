@@ -7,39 +7,39 @@ class FridgeTest < ActiveSupport::TestCase
     @recipe1 = recipes(:one)
   end
 
-  test 'should add 40 ingredients' do
-    40.times { |i| Ingredient.create({ name: "ingredient#{i}" }) }
-    @fridge.fill_with_random_ingredients!
-    assert @fridge.ingredients.length > 2
-  end
+  # test 'should add 40 ingredients' do
+  #   40.times { |i| Ingredient.create({ name: "ingredient#{i}" }) }
+  #   @fridge.fill_with_random_ingredients!
+  #   assert @fridge.ingredients.length > 2
+  # end
 
-  test 'should add recipes ingredients' do
-    @fridge.fill_with_recipe_ingredients! @recipe1
-    assert @fridge.ingredients == @recipe1.ingredients
-  end
+  # test 'should add recipes ingredients' do
+  #   @fridge.fill_with_recipe_ingredients! @recipe1
+  #   assert @fridge.ingredients == @recipe1.ingredients
+  # end
 
-  test 'should add ingredient and get recipe' do
-    assert_equal(0, @fridge.ingredients.count)
-    assert_equal(0, @fridge.recipes.count)
-    res = @fridge.add_ingredients_to_fridge! @ingredient1
-    assert_equal(res, [@recipe1])
-    assert_equal(1, @fridge.ingredients.count)
-    assert_equal(@fridge.recipes, @ingredient1.recipes)
-  end
+  # test 'should add ingredient and get recipe' do
+  #   assert_equal(0, @fridge.ingredients.count)
+  #   assert_equal(0, @fridge.recipes.count)
+  #   res = @fridge.add_ingredients_to_fridge! @ingredient1
+  #   assert_equal(res, [@recipe1])
+  #   assert_equal(1, @fridge.ingredients.count)
+  #   assert_equal(@fridge.recipes, @ingredient1.recipes)
+  # end
 
-  test 'should rm ingredient and get recipe removed' do
-    @ingredient2 = ingredients(:two)
-    @recipe2 = recipes(:two)
-    @recipe3 = recipes(:three)
+  # test 'should rm ingredient and get recipe removed' do
+  #   @ingredient2 = ingredients(:two)
+  #   @recipe2 = recipes(:two)
+  #   @recipe3 = recipes(:three)
 
-    assert_equal(0, @fridge.ingredients.count)
-    assert_equal(0, @fridge.recipes.count)
-    @fridge.add_ingredients_to_fridge! @ingredient2
-    res = @fridge.rm_ingredients_to_fridge! @ingredient2
-    assert_equal(res, [@recipe2, @recipe3])
-    assert_equal([], @fridge.ingredients)
-    assert_equal([], @fridge.recipes)
-  end
+  #   assert_equal(0, @fridge.ingredients.count)
+  #   assert_equal(0, @fridge.recipes.count)
+  #   @fridge.add_ingredients_to_fridge! @ingredient2
+  #   res = @fridge.rm_ingredients_to_fridge! @ingredient2
+  #   assert_equal(res, [@recipe2, @recipe3])
+  #   assert_equal([], @fridge.ingredients)
+  #   assert_equal([], @fridge.recipes)
+  # end
 end
 
 
